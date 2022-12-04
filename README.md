@@ -1,6 +1,8 @@
 # hugo preview in obsidian
 
-## features
+hugo preview int obsidian.
+
+## Features
 
 - [x] Open a `custome iframe` to preview hugo (via https://github.com/Ellpeck/ObsidianCustomFrames)
 - [x] Start `hugo server` in the background
