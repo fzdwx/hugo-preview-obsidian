@@ -1,0 +1,24 @@
+{
+	"name": "hugo-preview-obsidian",
+	"version": "0.1.0",
+	"description": "hugo preview for obsidian",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"version": "node version-bump.mjs && git add manifest.json versions.json"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "latest",
+		"builtin-modules": "latest",
+		"esbuild": "latest",
+		"obsidian": "latest",
+		"tslib": "latest",
+		"typescript": "latest",
+		"@codemirror/state": "^6.0.0",
+		"@codemirror/view": "^6.0.0"
+	}
+}

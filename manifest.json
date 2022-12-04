@@ -1,0 +1,10 @@
+{
+	"id": "hugo-preview-obsidian",
+	"name": "Hugo preview obsidian",
+	"version": "0.1.0",
+	"minAppVersion": "0.15.0",
+	"description": "hugo preview for obsidian",
+	"author": "fzdwx",
+	"authorUrl": "https://github.com/fzdwx",
+	"isDesktopOnly": false
+}
