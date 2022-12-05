@@ -26,5 +26,16 @@ export class HugoPreviewSettingTab extends PluginSettingTab {
 					this.plugin.settings.port = value;
 					await this.plugin.saveSettings();
 				}));
+
+		new Setting(containerEl)
+			.setName('Command')
+			.setDesc('quick shortcut, run your customer command. ${cwd} will replace with current working directory.')
+			.addText(text => text
+				.setPlaceholder('')
+				.setValue(this.plugin.settings.command)
+				.onChange(async (value) => {
+					this.plugin.settings.command = value;
+					await this.plugin.saveSettings();
+				}));
 	}
 }

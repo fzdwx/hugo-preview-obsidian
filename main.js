@@ -64,6 +64,10 @@ var HugoPreviewSettingTab = class extends import_obsidian2.PluginSettingTab {
       this.plugin.settings.port = value;
       await this.plugin.saveSettings();
     }));
+    new import_obsidian2.Setting(containerEl).setName("Command").setDesc("quick shortcut, run your customer command. ${cwd} will replace with current working directory.").addText((text) => text.setPlaceholder("").setValue(this.plugin.settings.command).onChange(async (value) => {
+      this.plugin.settings.command = value;
+      await this.plugin.saveSettings();
+    }));
   }
 };
 
@@ -168,18 +172,10 @@ var _Cmd = class {
       if (this.running) {
         return;
       }
-      let adapter = this.plugin.app.vault.adapter;
-      let cwd;
-      if (adapter instanceof import_obsidian4.FileSystemAdapter) {
-        cwd = adapter.getBasePath();
-      } else {
-        new import_obsidian4.Notice("Not a FileSystemAdapter, hugo server will not work.");
-        return;
-      }
       const { settings } = this.plugin;
       (0, import_child_process.exec)(`hugo server -D -p ${settings.port}`, {
         signal: this.controller.signal,
-        cwd
+        cwd: this.plugin.cwd()
       }, (error, stdout, stderr) => {
         if (error) {
           new import_obsidian4.Notice(`hugo exec error: ${error.message}`);
@@ -206,8 +202,10 @@ Cmd.create = (plugin) => {
 };
 
 // src/main.ts
+var import_child_process2 = require("child_process");
 var DEFAULT_SETTINGS = {
-  port: "1313"
+  port: "1313",
+  command: ""
 };
 var HugoPreview = class extends import_obsidian5.Plugin {
   constructor() {
@@ -215,6 +213,14 @@ var HugoPreview = class extends import_obsidian5.Plugin {
     this.clean = () => {
       this.app.workspace.detachLeavesOfType(VIEW_TYPE);
       this.cmd.stop();
+    };
+    this.cwd = () => {
+      let adapter = this.app.vault.adapter;
+      if (adapter instanceof import_obsidian5.FileSystemAdapter) {
+        return adapter.getBasePath();
+      } else {
+        return "";
+      }
     };
   }
   async onload() {
@@ -225,6 +231,26 @@ var HugoPreview = class extends import_obsidian5.Plugin {
     this.statusbar = Statusbar.create(this);
     this.statusbar.init();
     this.addSettingTab(new HugoPreviewSettingTab(this.app, this));
+    this.addCommand({
+      id: "run-command",
+      name: "run command",
+      hotkeys: [
+        { modifiers: ["Alt"], key: "F12" }
+      ],
+      callback: () => {
+        (0, import_child_process2.exec)(this.settings.command.replace("${cwd}", this.cwd()), (error, stdout, stderr) => {
+          if (error) {
+            new import_obsidian5.Notice(`error: ${error.message}`);
+            return;
+          }
+          if (stderr) {
+            new import_obsidian5.Notice(`stderr: ${stderr}`);
+            return;
+          }
+          new import_obsidian5.Notice(`stdout: ${stdout}`);
+        });
+      }
+    });
   }
   onunload() {
     this.clean();

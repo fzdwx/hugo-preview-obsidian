@@ -1,16 +1,30 @@
-import {addIcon, App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting} from 'obsidian';
+import {
+	addIcon,
+	App,
+	Editor,
+	FileSystemAdapter,
+	MarkdownView,
+	Modal,
+	Notice,
+	Plugin,
+	PluginSettingTab,
+	Setting
+} from 'obsidian';
 import {Statusbar} from "./statusbar";
 import {HugoPreviewSettingTab} from "./setting";
 import {HugoPreviewView, VIEW_TYPE} from "./view";
 import {hugoSvg} from "./svg";
 import {Cmd} from "./cmd";
+import {exec} from "child_process";
 
 interface Settings {
 	port: string;
+	command: string;
 }
 
 const DEFAULT_SETTINGS: Settings = {
 	port: '1313',
+	command: ""
 }
 
 export default class HugoPreview extends Plugin {
@@ -35,6 +49,22 @@ export default class HugoPreview extends Plugin {
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new HugoPreviewSettingTab(this.app, this));
+
+		this.addCommand({
+			id: "run-command",
+			name: "run command",
+			hotkeys: [
+				{modifiers: ["Alt"], key: "F12"}
+			],
+			callback: () => {
+				exec(this.settings.command.replace("${cwd}", this.cwd()), (error, stdout, stderr) => {
+					if (error) {
+						new Notice(`run command error: ${error.message}`);
+						return;
+					}
+				});
+			},
+		})
 	}
 
 	onunload() {
@@ -69,6 +99,15 @@ export default class HugoPreview extends Plugin {
 		this.app.workspace.revealLeaf(
 			this.app.workspace.getLeavesOfType(VIEW_TYPE)[0]
 		);
+	}
+
+	cwd = () => {
+		let adapter = this.app.vault.adapter;
+		if (adapter instanceof FileSystemAdapter) {
+			return adapter.getBasePath();
+		} else {
+			return ""
+		}
 	}
 }
 

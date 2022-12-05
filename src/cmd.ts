@@ -23,19 +23,10 @@ export class Cmd {
 			return
 		}
 
-		let adapter = this.plugin.app.vault.adapter;
-		let cwd;
-		if (adapter instanceof FileSystemAdapter) {
-			cwd = adapter.getBasePath();
-		} else {
-			new Notice("Not a FileSystemAdapter, hugo server will not work.");
-			return
-		}
-
 		const {settings} = this.plugin;
 		exec(`hugo server -D -p ${settings.port}`, {
 			signal: this.controller.signal,
-			cwd: cwd,
+			cwd: this.plugin.cwd(),
 		}, (error, stdout, stderr) => {
 			if (error) {
 				new Notice(`hugo exec error: ${error.message}`);
