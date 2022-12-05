@@ -23,4 +23,4 @@ Click on the gopher icon on the status bar
 
 ## Resource
 
-1. Changelog: [CHANGELOG.md](CHANGELOG.md)
+1. [CHANGELOG.md](CHANGELOG.md)
