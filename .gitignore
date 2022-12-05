@@ -14,7 +14,7 @@ main.js
 
 # Exclude sourcemaps
 *.map
-*main.js
+src/main.js
 # .obsidian
 data.json
 
