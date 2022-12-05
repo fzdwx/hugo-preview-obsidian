@@ -87,12 +87,12 @@ var _HugoPreviewView = class extends import_obsidian3.ItemView {
     return "Hugo Preview";
   }
   async onOpen() {
-    this.contentEl.empty();
-    this.contentEl.addClass("hugo-preview-view");
-    this.contentEl.appendChild(createFrame("http://localhost:1313"));
+    const container = this.containerEl.children[1];
+    container.empty();
+    container.addClass("hugo-preview-view");
+    container.appendChild(createFrame("http://localhost:1313"));
   }
   async onClose() {
-    this.contentEl.empty();
     this.plugin.clean();
   }
 };
@@ -224,7 +224,6 @@ var HugoPreview = class extends import_obsidian5.Plugin {
     };
   }
   async onload() {
-    this.app.workspace.detachLeavesOfType(VIEW_TYPE);
     await this.loadSettings();
     HugoPreviewView.load(this);
     this.cmd = Cmd.create(this);
@@ -240,14 +239,9 @@ var HugoPreview = class extends import_obsidian5.Plugin {
       callback: () => {
         (0, import_child_process2.exec)(this.settings.command.replace("${cwd}", this.cwd()), (error, stdout, stderr) => {
           if (error) {
-            new import_obsidian5.Notice(`error: ${error.message}`);
+            new import_obsidian5.Notice(`run command error: ${error.message}`);
             return;
           }
-          if (stderr) {
-            new import_obsidian5.Notice(`stderr: ${stderr}`);
-            return;
-          }
-          new import_obsidian5.Notice(`stdout: ${stdout}`);
         });
       }
     });

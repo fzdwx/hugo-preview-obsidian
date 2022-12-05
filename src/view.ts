@@ -29,13 +29,13 @@ export class HugoPreviewView extends ItemView {
 	}
 
 	async onOpen() {
-		this.contentEl.empty();
-		this.contentEl.addClass("hugo-preview-view");
-		this.contentEl.appendChild(createFrame("http://localhost:1313"));
+		const container = this.containerEl.children[1];
+		container.empty();
+		container.addClass("hugo-preview-view");
+		container.appendChild(createFrame("http://localhost:1313"));
 	}
 
 	async onClose() {
-		this.contentEl.empty();
 		this.plugin.clean();
 	}
 }

@@ -33,8 +33,6 @@ export default class HugoPreview extends Plugin {
 	cmd: Cmd
 
 	async onload() {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE);
-
 		await this.loadSettings();
 
 		// hugo preview view
