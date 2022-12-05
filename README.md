@@ -20,3 +20,7 @@ git clone https://github.com/fzdwx/hugo-preview-obsidian /path/to/.obsidian/plug
 Click on the gopher icon on the status bar
 
 ![img.png](img.png)
+
+## Resource
+
+1. Changelog: [CHANGELOG.md](CHANGELOG.md)
