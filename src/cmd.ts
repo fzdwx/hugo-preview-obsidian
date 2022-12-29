@@ -10,7 +10,7 @@ export class Cmd {
 		this.controller = new AbortController();
 	}
 
-	private readonly controller: AbortController;
+	public readonly controller: AbortController;
 
 	private readonly plugin: HugoPreview;
 

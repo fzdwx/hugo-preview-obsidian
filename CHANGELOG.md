@@ -1,5 +1,10 @@
 # Change log
 
+## 0.1.2 2022/12/29
+
+1. set isDesktopOnly to true
+2. add quit event handle
+
 ## 0.1.1 2022/12/05
 
 1. Add customer command setting, default is `Alt+F12`, you can think of it as a shortcut to execute a command, I set it

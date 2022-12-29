@@ -245,6 +245,10 @@ var HugoPreview = class extends import_obsidian5.Plugin {
         });
       }
     });
+    this.registerEvent(this.app.workspace.on("quit", () => {
+      this.cmd.controller.abort();
+      new import_obsidian5.Notice("hugo preview quit");
+    }));
   }
   onunload() {
     this.clean();

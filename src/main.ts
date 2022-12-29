@@ -63,6 +63,11 @@ export default class HugoPreview extends Plugin {
 				});
 			},
 		})
+
+		this.registerEvent(this.app.workspace.on('quit', () => {
+			this.cmd.controller.abort()
+			new Notice("hugo preview quit");
+		}));
 	}
 
 	onunload() {
