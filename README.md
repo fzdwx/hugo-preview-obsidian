@@ -1,6 +1,6 @@
 # Hugo preview in obsidian
 
-hugo preview int obsidian.
+hugo preview in obsidian.
 
 ## Features
 
@@ -11,17 +11,17 @@ hugo preview int obsidian.
 - [x] A customer command setting, default is `Alt+F12`, you can think of it as a shortcut to execute a command,
   I set it to start the terminal `wezterm start --class float --cwd ${cwd}`.
 
-## Install
 
-```shell
-git clone https://github.com/fzdwx/hugo-preview-obsidian /path/to/.obsidian/plugins/
-```
-
-## Use
+## Usage
 
 Click on the gopher icon on the status bar
 
-![img.png](img.png)
+![image](https://user-images.githubusercontent.com/65269574/211792531-e10b9d69-f109-4f75-aff6-1a8c132f8b40.png)
+
+## Screenshot
+
+![Record_select-area_20230111192058](https://user-images.githubusercontent.com/65269574/211794013-eab76237-433d-4b9f-bc22-0bb0e4c1fe28.gif)
+
 
 ## Resource
 
