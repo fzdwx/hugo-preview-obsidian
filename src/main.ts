@@ -78,7 +78,7 @@ export default class HugoPreview extends Plugin {
 		this.clean();
 	}
 
-	clean = () => {
+	clean() {
 		this.app.workspace.detachLeavesOfType(VIEW_TYPE);
 		this.cmd.stop();
 	}
@@ -94,7 +94,7 @@ export default class HugoPreview extends Plugin {
 
 	async hugoPreview() {
 		this.app.workspace.detachLeavesOfType(VIEW_TYPE);
-		await this.app.workspace.getRightLeaf(false).setViewState({
+		await this.app.workspace.getLeaf("split", "vertical").setViewState({
 			type: VIEW_TYPE,
 			active: true,
 		});

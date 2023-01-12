@@ -1,6 +1,6 @@
 {
 	"name": "hugo-preview-obsidian",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "hugo preview for obsidian",
 	"main": "main.js",
 	"scripts": {
@@ -12,13 +12,13 @@
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
+		"@codemirror/state": "^6.2.0",
+		"@codemirror/view": "^6.7.2",
 		"@types/node": "latest",
 		"builtin-modules": "latest",
 		"esbuild": "latest",
 		"obsidian": "latest",
 		"tslib": "latest",
-		"typescript": "latest",
-		"@codemirror/state": "^6.0.0",
-		"@codemirror/view": "^6.0.0"
+		"typescript": "latest"
 	}
 }

@@ -33,6 +33,9 @@ var import_obsidian5 = require("obsidian");
 var import_obsidian = require("obsidian");
 var _Statusbar = class {
   constructor(plugin) {
+    /**
+     * init status bar
+     */
     this.init = () => {
       (0, import_obsidian.setIcon)(this.statusBarItemEl, "hugo");
       this.plugin.registerDomEvent(this.statusBarItemEl, "click", () => {
@@ -45,6 +48,10 @@ var _Statusbar = class {
   }
 };
 var Statusbar = _Statusbar;
+/**
+ * create status bar
+ * @param plugin
+ */
 Statusbar.create = (plugin) => {
   return new _Statusbar(plugin);
 };
@@ -210,10 +217,6 @@ var DEFAULT_SETTINGS = {
 var HugoPreview = class extends import_obsidian5.Plugin {
   constructor() {
     super(...arguments);
-    this.clean = () => {
-      this.app.workspace.detachLeavesOfType(VIEW_TYPE);
-      this.cmd.stop();
-    };
     this.cwd = () => {
       let adapter = this.app.vault.adapter;
       if (adapter instanceof import_obsidian5.FileSystemAdapter) {
@@ -256,6 +259,10 @@ var HugoPreview = class extends import_obsidian5.Plugin {
   unload() {
     this.clean();
   }
+  clean() {
+    this.app.workspace.detachLeavesOfType(VIEW_TYPE);
+    this.cmd.stop();
+  }
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
     (0, import_obsidian5.addIcon)("hugo", hugoSvg);
@@ -265,7 +272,7 @@ var HugoPreview = class extends import_obsidian5.Plugin {
   }
   async hugoPreview() {
     this.app.workspace.detachLeavesOfType(VIEW_TYPE);
-    await this.app.workspace.getRightLeaf(false).setViewState({
+    await this.app.workspace.getLeaf("split", "vertical").setViewState({
       type: VIEW_TYPE,
       active: true
     });

@@ -1,5 +1,9 @@
 # Change log
 
+## 0.1.3 2023/01/12
+
+1. `HugoView` move to `Tab` group,not `Right`.
+
 ## 0.1.2 2022/12/29
 
 1. set isDesktopOnly to true

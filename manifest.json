@@ -1,9 +1,9 @@
 {
 	"id": "hugo-preview-obsidian",
 	"name": "Hugo preview obsidian",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"minAppVersion": "0.15.0",
-	"description": "hugo preview for obsidian",
+	"description": "Hugo preview in obsidian",
 	"author": "fzdwx",
 	"authorUrl": "https://github.com/fzdwx",
 	"isDesktopOnly": true
