@@ -18,11 +18,13 @@ import {Cmd} from "./cmd";
 import {exec} from "child_process";
 
 interface Settings {
+	hugoCommandPath: string;
 	port: string;
 	command: string;
 }
 
 const DEFAULT_SETTINGS: Settings = {
+	hugoCommandPath: 'hugo',
 	port: '1313',
 	command: ""
 }

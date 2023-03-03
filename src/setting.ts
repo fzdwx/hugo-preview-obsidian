@@ -37,5 +37,16 @@ export class HugoPreviewSettingTab extends PluginSettingTab {
 					this.plugin.settings.command = value;
 					await this.plugin.saveSettings();
 				}));
+
+		new Setting(containerEl)
+			.setName('Hugo command path')
+			.setDesc('hugo command path, default: hugo')
+			.addText(text => text
+				.setPlaceholder('default: hugo')
+				.setValue(this.plugin.settings.hugoCommandPath)
+				.onChange(async (value) => {
+					this.plugin.settings.hugoCommandPath = value;
+					await this.plugin.saveSettings();
+				}));
 	}
 }

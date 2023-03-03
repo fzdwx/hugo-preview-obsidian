@@ -24,7 +24,7 @@ export class Cmd {
 		}
 
 		const {settings} = this.plugin;
-		exec(`hugo server -D -p ${settings.port}`, {
+		exec(`${settings.hugoCommandPath} server -D -p ${settings.port}`, {
 			signal: this.controller.signal,
 			cwd: this.plugin.cwd(),
 		}, (error, stdout, stderr) => {

@@ -75,6 +75,10 @@ var HugoPreviewSettingTab = class extends import_obsidian2.PluginSettingTab {
       this.plugin.settings.command = value;
       await this.plugin.saveSettings();
     }));
+    new import_obsidian2.Setting(containerEl).setName("Hugo command path").setDesc("hugo command path, default: hugo").addText((text) => text.setPlaceholder("default: hugo").setValue(this.plugin.settings.hugoCommandPath).onChange(async (value) => {
+      this.plugin.settings.hugoCommandPath = value;
+      await this.plugin.saveSettings();
+    }));
   }
 };
 
@@ -180,7 +184,7 @@ var _Cmd = class {
         return;
       }
       const { settings } = this.plugin;
-      (0, import_child_process.exec)(`hugo server -D -p ${settings.port}`, {
+      (0, import_child_process.exec)(`${settings.hugoCommandPath} server -D -p ${settings.port}`, {
         signal: this.controller.signal,
         cwd: this.plugin.cwd()
       }, (error, stdout, stderr) => {
@@ -211,6 +215,7 @@ Cmd.create = (plugin) => {
 // src/main.ts
 var import_child_process2 = require("child_process");
 var DEFAULT_SETTINGS = {
+  hugoCommandPath: "hugo",
   port: "1313",
   command: ""
 };

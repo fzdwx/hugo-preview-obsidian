@@ -1,5 +1,9 @@
 # Change log
 
+## 0.1.4 2023/03/03
+
+1. Add setting `hugo command path`, default is `hugo`
+
 ## 0.1.3 2023/01/12
 
 1. `HugoView` move to `Tab` group,not `Right`.
