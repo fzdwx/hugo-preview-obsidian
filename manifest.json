@@ -1,7 +1,7 @@
 {
 	"id": "hugo-preview-obsidian",
 	"name": "Hugo preview obsidian",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"minAppVersion": "0.15.0",
 	"description": "Hugo preview in obsidian",
 	"author": "fzdwx",

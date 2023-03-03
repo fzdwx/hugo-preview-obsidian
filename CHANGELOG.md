@@ -1,6 +1,6 @@
 # Change log
 
-## 0.1.4 2023/03/03
+## 0.1.5 2023/03/03
 
 1. Add setting `hugo command path`, default is `hugo`
 
