@@ -1,5 +1,9 @@
 # Change log
 
+## 0.1.6 2024/01/26
+
+1. Change plugin name to `Hugo preview`
+
 ## 0.1.5 2023/03/03
 
 1. Add setting `hugo command path`, default is `hugo`

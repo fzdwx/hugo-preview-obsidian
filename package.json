@@ -1,6 +1,6 @@
 {
 	"name": "hugo-preview-obsidian",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "hugo preview for obsidian",
 	"main": "main.js",
 	"scripts": {
