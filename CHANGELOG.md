@@ -2,7 +2,7 @@
 
 ## 0.1.7 2024/09/02
 
-1. Add setting `hugo server custom flags`, default is empty.
+1. Add setting `hugo server custom flags`, default is `--navigateToChanged`.
 
 ## 0.1.6 2024/01/2
 

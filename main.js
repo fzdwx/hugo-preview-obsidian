@@ -75,7 +75,7 @@ var HugoPreviewSettingTab = class extends import_obsidian2.PluginSettingTab {
       this.plugin.settings.hugoCommandPath = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian2.Setting(containerEl).setName("Hugo Server Custom flags").setDesc("hugo server custom flags, default:").addText((text) => text.setPlaceholder("").setValue(this.plugin.settings.hugoServerFlags).onChange(async (value) => {
+    new import_obsidian2.Setting(containerEl).setName("Hugo Server Custom flags").setDesc("hugo server custom flags, default: --navigateToChanged").addText((text) => text.setPlaceholder("--navigateToChanged").setValue(this.plugin.settings.hugoServerFlags).onChange(async (value) => {
       this.plugin.settings.hugoServerFlags = value;
       await this.plugin.saveSettings();
     }));
@@ -220,7 +220,7 @@ var Cmd = _Cmd;
 var import_child_process2 = require("child_process");
 var DEFAULT_SETTINGS = {
   hugoCommandPath: "hugo",
-  hugoServerFlags: "-N",
+  hugoServerFlags: "--navigateToChanged",
   port: "1313",
   command: ""
 };

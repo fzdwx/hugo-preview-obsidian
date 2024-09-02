@@ -40,9 +40,9 @@ export class HugoPreviewSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Hugo Server Custom flags')
-			.setDesc('hugo server custom flags, default:')
+			.setDesc('hugo server custom flags, default: --navigateToChanged')
 			.addText(text => text
-				.setPlaceholder('')
+				.setPlaceholder('--navigateToChanged')
 				.setValue(this.plugin.settings.hugoServerFlags)
 				.onChange(async (value) => {
 					this.plugin.settings.hugoServerFlags = value;
