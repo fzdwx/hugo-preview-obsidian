@@ -19,12 +19,14 @@ import {exec} from "child_process";
 
 interface Settings {
 	hugoCommandPath: string;
+	hugoServerFlags: string;
 	port: string;
 	command: string;
 }
 
 const DEFAULT_SETTINGS: Settings = {
 	hugoCommandPath: 'hugo',
+	hugoServerFlags: '--navigateToChanged',
 	port: '1313',
 	command: ""
 }

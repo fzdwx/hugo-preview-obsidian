@@ -1,6 +1,6 @@
 import HugoPreview from "./main";
 import {exec} from "child_process";
-import {FileSystemAdapter, Notice, Platform} from "obsidian";
+import {Notice} from "obsidian";
 
 export class Cmd {
 	private running: boolean;
@@ -24,7 +24,7 @@ export class Cmd {
 		}
 
 		const {settings} = this.plugin;
-		exec(`${settings.hugoCommandPath} server -D -p ${settings.port}`, {
+		exec(`${settings.hugoCommandPath} server -D -p ${settings.port} ${settings.hugoServerFlags} `, {
 			signal: this.controller.signal,
 			cwd: this.plugin.cwd(),
 		}, (error, stdout, stderr) => {
