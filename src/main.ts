@@ -26,7 +26,7 @@ interface Settings {
 
 const DEFAULT_SETTINGS: Settings = {
 	hugoCommandPath: 'hugo',
-	hugoServerFlags: '-N',
+	hugoServerFlags: '',
 	port: '1313',
 	command: ""
 }
