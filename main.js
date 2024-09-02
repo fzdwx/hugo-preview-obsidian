@@ -31,7 +31,7 @@ var import_obsidian5 = require("obsidian");
 
 // src/statusbar.ts
 var import_obsidian = require("obsidian");
-var _Statusbar = class {
+var _Statusbar = class _Statusbar {
   constructor(plugin) {
     /**
      * init status bar
@@ -47,14 +47,14 @@ var _Statusbar = class {
     this.statusBarItemEl = plugin.addStatusBarItem();
   }
 };
-var Statusbar = _Statusbar;
 /**
  * create status bar
  * @param plugin
  */
-Statusbar.create = (plugin) => {
+_Statusbar.create = (plugin) => {
   return new _Statusbar(plugin);
 };
+var Statusbar = _Statusbar;
 
 // src/setting.ts
 var import_obsidian2 = require("obsidian");
@@ -71,12 +71,16 @@ var HugoPreviewSettingTab = class extends import_obsidian2.PluginSettingTab {
       this.plugin.settings.port = value;
       await this.plugin.saveSettings();
     }));
-    new import_obsidian2.Setting(containerEl).setName("Command").setDesc("quick shortcut, run your customer command. ${cwd} will replace with current working directory.").addText((text) => text.setPlaceholder("").setValue(this.plugin.settings.command).onChange(async (value) => {
-      this.plugin.settings.command = value;
-      await this.plugin.saveSettings();
-    }));
     new import_obsidian2.Setting(containerEl).setName("Hugo command path").setDesc("hugo command path, default: hugo").addText((text) => text.setPlaceholder("default: hugo").setValue(this.plugin.settings.hugoCommandPath).onChange(async (value) => {
       this.plugin.settings.hugoCommandPath = value;
+      await this.plugin.saveSettings();
+    }));
+    new import_obsidian2.Setting(containerEl).setName("Hugo Server Custom flags").setDesc("hugo server custom flags, default:").addText((text) => text.setPlaceholder("").setValue(this.plugin.settings.hugoServerFlags).onChange(async (value) => {
+      this.plugin.settings.hugoServerFlags = value;
+      await this.plugin.saveSettings();
+    }));
+    new import_obsidian2.Setting(containerEl).setName("Command").setDesc("quick shortcut, run your customer command. ${cwd} will replace with current working directory.").addText((text) => text.setPlaceholder("").setValue(this.plugin.settings.command).onChange(async (value) => {
+      this.plugin.settings.command = value;
       await this.plugin.saveSettings();
     }));
   }
@@ -86,7 +90,7 @@ var HugoPreviewSettingTab = class extends import_obsidian2.PluginSettingTab {
 var import_obsidian3 = require("obsidian");
 var VIEW_TYPE = "hugo-preview-view";
 var View;
-var _HugoPreviewView = class extends import_obsidian3.ItemView {
+var _HugoPreviewView = class _HugoPreviewView extends import_obsidian3.ItemView {
   constructor(leaf, plugin) {
     super(leaf);
     this.plugin = plugin;
@@ -107,13 +111,13 @@ var _HugoPreviewView = class extends import_obsidian3.ItemView {
     this.plugin.clean();
   }
 };
-var HugoPreviewView = _HugoPreviewView;
-HugoPreviewView.load = (plugin) => {
+_HugoPreviewView.load = (plugin) => {
   plugin.registerView(VIEW_TYPE, (leaf) => {
     View = new _HugoPreviewView(leaf, plugin);
     return View;
   });
 };
+var HugoPreviewView = _HugoPreviewView;
 var createFrame = (url) => {
   let frame;
   let style = `padding: 10px;`;
@@ -177,14 +181,14 @@ var hugoSvg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 // src/cmd.ts
 var import_child_process = require("child_process");
 var import_obsidian4 = require("obsidian");
-var _Cmd = class {
+var _Cmd = class _Cmd {
   constructor(plugin) {
     this.run = async () => {
       if (this.running) {
         return;
       }
       const { settings } = this.plugin;
-      (0, import_child_process.exec)(`${settings.hugoCommandPath} server -D -p ${settings.port}`, {
+      (0, import_child_process.exec)(`${settings.hugoCommandPath} server -D -p ${settings.port} ${settings.hugoServerFlags} `, {
         signal: this.controller.signal,
         cwd: this.plugin.cwd()
       }, (error, stdout, stderr) => {
@@ -207,15 +211,16 @@ var _Cmd = class {
     this.controller = new AbortController();
   }
 };
-var Cmd = _Cmd;
-Cmd.create = (plugin) => {
+_Cmd.create = (plugin) => {
   return new _Cmd(plugin);
 };
+var Cmd = _Cmd;
 
 // src/main.ts
 var import_child_process2 = require("child_process");
 var DEFAULT_SETTINGS = {
   hugoCommandPath: "hugo",
+  hugoServerFlags: "-N",
   port: "1313",
   command: ""
 };

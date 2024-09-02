@@ -28,17 +28,6 @@ export class HugoPreviewSettingTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName('Command')
-			.setDesc('quick shortcut, run your customer command. ${cwd} will replace with current working directory.')
-			.addText(text => text
-				.setPlaceholder('')
-				.setValue(this.plugin.settings.command)
-				.onChange(async (value) => {
-					this.plugin.settings.command = value;
-					await this.plugin.saveSettings();
-				}));
-
-		new Setting(containerEl)
 			.setName('Hugo command path')
 			.setDesc('hugo command path, default: hugo')
 			.addText(text => text
@@ -46,6 +35,28 @@ export class HugoPreviewSettingTab extends PluginSettingTab {
 				.setValue(this.plugin.settings.hugoCommandPath)
 				.onChange(async (value) => {
 					this.plugin.settings.hugoCommandPath = value;
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Hugo Server Custom flags')
+			.setDesc('hugo server custom flags, default:')
+			.addText(text => text
+				.setPlaceholder('')
+				.setValue(this.plugin.settings.hugoServerFlags)
+				.onChange(async (value) => {
+					this.plugin.settings.hugoServerFlags = value;
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Command')
+			.setDesc('quick shortcut, run your customer command. ${cwd} will replace with current working directory.')
+			.addText(text => text
+				.setPlaceholder('')
+				.setValue(this.plugin.settings.command)
+				.onChange(async (value) => {
+					this.plugin.settings.command = value;
 					await this.plugin.saveSettings();
 				}));
 	}

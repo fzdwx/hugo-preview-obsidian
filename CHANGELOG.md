@@ -1,6 +1,10 @@
 # Change log
 
-## 0.1.6 2024/01/26
+## 0.1.7 2024/09/02
+
+1. Add setting `hugo server custom flags`, default is empty.
+
+## 0.1.6 2024/01/2
 
 1. Change plugin name to `Hugo preview`
 
