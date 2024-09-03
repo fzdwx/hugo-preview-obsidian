@@ -8,6 +8,7 @@ hugo preview in obsidian.
 - [x] Start `hugo server` in the background
 	- There is still a bit of a problem currently, the child process (hugo process) does not close when the program
 	  launches.
+    - Support add custom flags for `hugo server`, default is `--navigateToChanged`
 - [x] A customer command setting, default is `Alt+F12`, you can think of it as a shortcut to execute a command,
   I set it to start the terminal `wezterm start --class float --cwd ${cwd}`.
 
